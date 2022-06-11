@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Fragments/fragment::layout(~{::section})">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body th:bgcolor="gray">
+
+<section>
+    <div class="container ">
+        <div class="row">
+            <div class="col-md-8 offset-md-2 ">
+                <div class="my-card mt-4 mb-4">
+
+
+                    <!-- Notification Message -->
+                    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                        <p class="text-center" th:text="${session.message.content}">
+                        </p>
+                        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                    </div>
+
+
+                    <!-- Image or Icon -->
+                    <div class="container text-center">
+                        <img style="width: 50px" src="" th:src="@{/image/register.png}" alt=""/>
+                    </div>
+
+                    <!-- Header -->
+                    <h1 class="text-center">Sign Up</h1>
+                    <hr>
+
+                    <!-- Form Start -->
+                    <form th:action="@{/do-register}" method="post" th:object="${user}">
+
+                        <!-- Field of firstName -->
+                        <div class="mb-3">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input th:value="${user.firstName}"
+                                   name="firstName"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Enter Here"
+                                   id="firstName"
+                                   required
+                                   th:classappend="${#fields.hasErrors('firstName') ? 'is-invalid' : ''}">
+
+                            <div class="invalid-feedback"
+                                 th:each="e : ${#fields.errors('firstName')}"
+                                 th:text="${e}">
+                            </div>
+
+                        </div>
+
+                        <!-- Field of lastName -->
+                        <div class="mb-3">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input th:value="${user.lastName}"
+                                   name="lastName"
+                                   type="text"
+                                   class="form-control"
+                                   placeholder="Enter Here"
+                                   id="lastName">
+
+                        </div>
+
+                        <!-- Field of email -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input th:value="${user.email}"
+                                   name="email"
+                                   type="email"
+                                   class="form-control"
+                                   placeholder="Enter Here"
+                                   id="email"
+                                   required
+                                   th:classappend="${#fields.hasErrors('email') ? 'is-invalid' : ''}">
+
+                            <div class="invalid-feedback"
+                                 th:each="e : ${#fields.errors('email')}"
+                                 th:text="${e}">
+                            </div>
+
+                        </div>
+
+                        <!-- Field of password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password"
+                                   name="password"
+                                   class="form-control"
+                                   placeholder="Enter Here"
+                                   id="password"
+                                   required
+                                   th:classappend="${#fields.hasErrors('password') ? 'is-invalid' : ''}">
+
+                            <div class="invalid-feedback"
+                                 th:each="e : ${#fields.errors('password')}"
+                                 th:text="${e}">
+                            </div>
+                        </div>
+                        <!-- Field of about -->
+                        <div class="mb-3">
+                                <textarea th:value="${user.about}"
+                                          name="about" placeholder="Enter Something Yourself"
+                                          rows="10" class="form-control"></textarea>
+                        </div>
+
+                        <!-- Field of checkbox of agreement -->
+                        <div class="form-group form-check mb-3">
+                            <input type="checkbox"
+                                   name="agreement"
+                                   class="form-check-input align-center"
+                                   id="agreement"/>
+
+                            <label class="center" for="agreement">Accept terms & Condition </label>
+                        </div>
+
+                        <!-- Section of 2 Button -->
+                        <div class="container text-center mt-3">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="reset" class="btn btn-warning">Reset</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+</body>
+</html>
+

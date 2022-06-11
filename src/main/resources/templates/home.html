@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="Fragments/fragment::layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <title>Form</title>
+</head>
+<body th:bgcolor="gray">
+
+    <section class="banner d-flex justify-content-center align-items-center">
+        <div class="text-center">
+            <h1>Smart Contact Manager</h1>
+            <p>
+                Start collect your contact with a smarter way.
+                We provide a very efficient and smarter way of handling contacts.
+            </p>
+            <button th:href="@{/signup}" type="button" class="btn btn-outline-primary">Get Start</button>
+        </div>
+    </section>
+
+</body>
+</html>
+
