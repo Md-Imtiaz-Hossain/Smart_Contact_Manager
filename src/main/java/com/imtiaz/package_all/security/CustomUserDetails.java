@@ -1,6 +1,6 @@
 package com.imtiaz.package_all.security;
 
-import com.imtiaz.package_all.EntityModel.User;
+import com.imtiaz.package_all.EntityModel.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,26 +10,26 @@ import java.util.List;
 
 public class CustomUserDetails implements UserDetails {
 
-    private User user;
+    private UserEntity userEntity;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
+    public CustomUserDetails(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority simpleGrantedAuthority =  new SimpleGrantedAuthority(user.getRole());
+        SimpleGrantedAuthority simpleGrantedAuthority =  new SimpleGrantedAuthority(userEntity.getRole());
         return List.of(simpleGrantedAuthority);
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return userEntity.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getEmail();
+        return userEntity.getEmail();
     }
 
     @Override

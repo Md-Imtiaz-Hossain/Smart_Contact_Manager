@@ -1,10 +1,11 @@
 package com.imtiaz.package_all.Service;
 
-import com.smartcontact.dto.ContactDTO;
-import com.smartcontact.entities.ContactEntity;
-import com.smartcontact.entities.UserEntity;
-import com.smartcontact.repositories.ContactReposotories;
-import com.smartcontact.repositories.UserRepositories;
+
+import com.imtiaz.package_all.EntityModel.ContactEntity;
+import com.imtiaz.package_all.EntityModel.UserEntity;
+import com.imtiaz.package_all.Repository.ContactReposotories;
+import com.imtiaz.package_all.Repository.UserRepositories;
+import com.imtiaz.package_all.dto.ContactDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.domain.Page;
@@ -20,6 +21,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.util.Optional;
+
 
 @Service
 public class ContactServiceImpl implements ContactService {
@@ -50,7 +52,7 @@ public class ContactServiceImpl implements ContactService {
 	public void deleteContactById(Long cId, String userName) {
 		Optional<ContactEntity> contactOptional = contactRepositories.findById(cId);
 		ContactEntity contactEntity = contactOptional.get();
-		contactEntity.setUser(null);
+		contactEntity.setUserEntity(null);
 		UserEntity userEntity = userRepositories.getUserByUserName(userName);
 		List<ContactEntity> contactEntities = userEntity.getContactList();
 		contactEntities.remove(contactEntity);
@@ -102,7 +104,7 @@ public class ContactServiceImpl implements ContactService {
 			
 			UserEntity userEntity = userRepositories.getUserByUserName(userName);
 			ContactEntity contactEntity = ContactEntity.of(contactDTO);
-			contactEntity.setUser(userEntity);
+			contactEntity.setUserEntity(userEntity);
 			contactRepositories.save(contactEntity);
 			
 		}catch(Exception e) {

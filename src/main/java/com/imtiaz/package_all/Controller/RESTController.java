@@ -1,7 +1,7 @@
 package com.imtiaz.package_all.Controller;
 
-import com.imtiaz.package_all.EntityModel.User;
-import com.imtiaz.package_all.Repository.UserRepo;
+import com.imtiaz.package_all.EntityModel.UserEntity;
+import com.imtiaz.package_all.Repository.UserRepositories;
 import com.imtiaz.package_all.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +17,11 @@ public class RESTController {
     @Autowired
     private UserService userService;
     @Autowired
-    private UserRepo userRepo;
+    private UserRepositories userRepositories;
 
     @GetMapping("/all")
-    public List<User> allUser(){
-        return userRepo.findAll();
+    public List<UserEntity> allUser(){
+        return userRepositories.findAll();
     }
 
 

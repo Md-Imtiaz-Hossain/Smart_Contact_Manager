@@ -1,7 +1,7 @@
 package com.imtiaz.package_all.Controller;
 
 
-import com.imtiaz.package_all.EntityModel.User;
+import com.imtiaz.package_all.EntityModel.UserEntity;
 import com.imtiaz.package_all.Helper.Message;
 import com.imtiaz.package_all.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +44,14 @@ public class HomeController {
     @GetMapping("/signup")
     public String signup(Model model) {
         model.addAttribute("title", "Signup - Smart Contact Manager");
-        model.addAttribute("user", new User());
+        model.addAttribute("user", new UserEntity());
         return "/Signup/signup";
     }
 
 
     // process the registration form
     @PostMapping("/do-register")
-    public String doRegister(@Valid @ModelAttribute("user") User user, Errors bindingResult,
+    public String doRegister(@Valid @ModelAttribute("user") UserEntity userEntity, Errors bindingResult,
                              @RequestParam(value = "agreement", defaultValue = "false") boolean agreement,
                              Model model,
                              HttpSession session){
@@ -65,20 +65,20 @@ public class HomeController {
 
             if (bindingResult.hasErrors()){
                 System.out.println("Error " + bindingResult.toString());
-                model.addAttribute("user", user);
+                model.addAttribute("user", userEntity);
                 return "/Signup/signup";
             }
 
-            user.setRole("ROLE_USER");
-            user.setEnable(true);
-            user.setImageUrl("default.png");
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            userEntity.setRole("ROLE_USER");
+            userEntity.setEnable(true);
+            userEntity.setImageUrl("default.png");
+            userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
 
-            System.out.println(user);
+            System.out.println(userEntity);
 
-             userService.saveUser(user);
+             userService.saveUser(userEntity);
 
-            model.addAttribute("user", new User());
+            model.addAttribute("user", new UserEntity());
             session.setAttribute("message", new Message("Successfully Registered !!!", "alert-success"));
             return "/Signup/signup";
 
@@ -86,7 +86,7 @@ public class HomeController {
 
         }catch (Exception e) {
             e.printStackTrace();
-            model.addAttribute("user", user);
+            model.addAttribute("user", userEntity);
             session.setAttribute("message", new Message("Something Went Wrong !!! Must agree terms and Condition ", "alert-danger"));
             return "/Signup/signup";
         }

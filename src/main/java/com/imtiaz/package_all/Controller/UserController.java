@@ -1,10 +1,10 @@
 package com.imtiaz.package_all.Controller;
 
-import com.imtiaz.package_all.EntityModel.Contact;
-import com.imtiaz.package_all.EntityModel.User;
+import com.imtiaz.package_all.EntityModel.ContactEntity;
+import com.imtiaz.package_all.EntityModel.UserEntity;
 import com.imtiaz.package_all.Helper.Message;
-import com.imtiaz.package_all.Repository.ContactRepo;
-import com.imtiaz.package_all.Repository.UserRepo;
+import com.imtiaz.package_all.Repository.ContactReposotories;
+import com.imtiaz.package_all.Repository.UserRepositories;
 import com.imtiaz.package_all.Service.ContactService;
 import com.imtiaz.package_all.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,17 +24,16 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
-    private UserRepo userRepository;
+    private UserRepositories userRepository;
 
     @Autowired
-    private ContactRepo contactRepository;
+    private ContactReposotories contactRepository;
 
     @Autowired
     UserService userService;
@@ -43,7 +42,7 @@ public class UserController {
     ContactService contactService;
 
     @Autowired
-    ContactRepo contactRepo;
+    ContactReposotories contactReposotories;
 
 
     // Method for adding common data for every handler automatically
@@ -51,9 +50,9 @@ public class UserController {
     public void addCommonData(Model model, Principal principal) {
         String userName = principal.getName();
         System.out.println("Username --> " + userName);
-        User user = userRepository.getUserByUserName(userName); // Introduce a local variable ctrl+alt+v
-        System.out.println(user);
-        model.addAttribute("user", user);
+        UserEntity userEntity = userRepository.getUserByUserName(userName); // Introduce a local variable ctrl+alt+v
+        System.out.println(userEntity);
+        model.addAttribute("user", userEntity);
     }
 
 
@@ -69,20 +68,20 @@ public class UserController {
     @GetMapping("/add-contact")
     public String contactAdd(Model model) {
         model.addAttribute("title", "Add Contact Form");
-        model.addAttribute("contact", new Contact());
+        model.addAttribute("contact", new ContactEntity());
         return "/normal/add-contact-form";
     }
 
     //processing add contact form
     @PostMapping("/process-add-contact-form")
     public String processContact(
-            @ModelAttribute Contact contact,
+            @ModelAttribute ContactEntity contactEntity,
             @RequestParam("profileImage") MultipartFile file,
             Principal principal,HttpSession session) {
 
         try {
             String name = principal.getName();
-            User user = this.userRepository.getUserByUserName(name);
+            UserEntity userEntity = this.userRepository.getUserByUserName(name);
             //processing and uploading file..
             if(file.isEmpty())            {
                 //if the file is empty then try our message
@@ -90,16 +89,16 @@ public class UserController {
             }
             else {
                 //file the file to folder and update the name to contact
-                contact.setPhone(file.getOriginalFilename());
+                contactEntity.setPhone(file.getOriginalFilename());
                 File saveFile=new ClassPathResource("static/img").getFile();
                 Path path = Paths.get(saveFile.getAbsolutePath()+File.separator+file.getOriginalFilename());
                 Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
                 System.out.println("Image is uploaded");
             }
-            user.getContacts().add(contact);
-            contact.setUser(user);
-            this.userRepository.save(user);
-            System.out.println("DATA "+contact);
+            userEntity.getContactEntities().add(contactEntity);
+            contactEntity.setUserEntity(userEntity);
+            this.userRepository.save(userEntity);
+            System.out.println("DATA "+ contactEntity);
             System.out.println("Added to data base");
             //message success.......
             session.setAttribute("message", new Message("Your contact is added !! Add more..", "success") );
@@ -120,11 +119,11 @@ public class UserController {
         m.addAttribute("title","Show User Contacts");
         //contact ki list ko bhejni hai
         String userName = principal.getName();
-        User user = this.userRepository.getUserByUserName(userName);
+        UserEntity userEntity = this.userRepository.getUserByUserName(userName);
         //currentPage-page
         //Contact Per page - 5
         Pageable pageable = PageRequest.of(page, 8);
-        Page<Contact> contacts = this.contactRepository.findContactsByUser(user.getId(),pageable);
+        Page<ContactEntity> contacts = this.contactRepository.findContactsByUser(userEntity.getId(),pageable);
         m.addAttribute("contacts",contacts);
         m.addAttribute("currentPage",page);
         m.addAttribute("totalPages",contacts.getTotalPages());

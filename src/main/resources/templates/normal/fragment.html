@@ -32,15 +32,15 @@
 
             <ul class="navbar-nav text-capitalize">
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" th:href="@{/user/index}" href="#">Home</a>
+                    <a class="nav-link" aria-current="page" th:href="@{/userEntity/index}" href="#">Home</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/show-all-contact}" href="#">View Contact</a>
+                    <a class="nav-link" th:href="@{/userEntity/show-all-contactEntity}" href="#">View Contact</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" th:href="@{/user/add-contact}" href="#">Add Contact</a>
+                    <a class="nav-link" th:href="@{/userEntity/add-contactEntity}" href="#">Add Contact</a>
                 </li>
 
                 <li class="nav-item">
@@ -52,7 +52,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#"><span th:text="${user.getFirstName}"></span></a>
+                    <a class="nav-link" href="#"><span th:text="${userEntity.getFirstName}"></span></a>
                 </li>
 
                 <li class="nav-item">

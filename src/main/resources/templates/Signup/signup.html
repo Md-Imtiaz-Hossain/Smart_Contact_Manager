@@ -32,12 +32,12 @@
                     <hr>
 
                     <!-- Form Start -->
-                    <form th:action="@{/do-register}" method="post" th:object="${user}">
+                    <form th:action="@{/do-register}" method="post" th:object="${userEntity}">
 
                         <!-- Field of firstName -->
                         <div class="mb-3">
                             <label for="firstName" class="form-label">First Name</label>
-                            <input th:value="${user.firstName}"
+                            <input th:value="${userEntity.firstName}"
                                    name="firstName"
                                    type="text"
                                    class="form-control"
@@ -56,7 +56,7 @@
                         <!-- Field of lastName -->
                         <div class="mb-3">
                             <label for="lastName" class="form-label">Last Name</label>
-                            <input th:value="${user.lastName}"
+                            <input th:value="${userEntity.lastName}"
                                    name="lastName"
                                    type="text"
                                    class="form-control"
@@ -68,7 +68,7 @@
                         <!-- Field of email -->
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input th:value="${user.email}"
+                            <input th:value="${userEntity.email}"
                                    name="email"
                                    type="email"
                                    class="form-control"
@@ -102,7 +102,7 @@
                         </div>
                         <!-- Field of about -->
                         <div class="mb-3">
-                                <textarea th:value="${user.about}"
+                                <textarea th:value="${userEntity.about}"
                                           name="about" placeholder="Enter Something Yourself"
                                           rows="10" class="form-control"></textarea>
                         </div>
