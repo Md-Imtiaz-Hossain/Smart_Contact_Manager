@@ -15,14 +15,14 @@ public class CustomUserDetailsService implements UserDetailsService {
     private UserRepo userRepo;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        // TODO Auto-generated method stub
 
-        User user = userRepo.getUserByUserName(email);
-
-        if (user == null){
-            throw new UsernameNotFoundException("User Not Found");
+        User userEntity = userRepo.getUserByUserName(username);
+        if(userEntity == null) {
+            throw new UsernameNotFoundException("Username Not Found !!! ");
         }
-
-        return new CustomUserDetails(user);
+        CustomUserDetails customUserDetails = new CustomUserDetails(userEntity);
+        return customUserDetails;
     }
 }
