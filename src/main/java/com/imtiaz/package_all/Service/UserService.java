@@ -1,20 +1,21 @@
 package com.imtiaz.package_all.Service;
 
-import com.imtiaz.package_all.EntityModel.User;
-import com.imtiaz.package_all.Repository.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
-public class UserService {
+import com.imtiaz.package_all.dto.ContactDTO;
+import com.imtiaz.package_all.dto.UserDTO;
+import org.springframework.web.multipart.MultipartFile;
 
-    @Autowired
-    private UserRepo userRepo;
 
-    public void saveUser(User user) {
-        userRepo.save(user);
+public interface UserService {
 
-    }
+    public UserDTO save(UserDTO userDTO);
+
+    public UserDTO getUserDetailsByUserName(String username);
+
+    public boolean saveContact(String userName, MultipartFile file,  ContactDTO contactdto);
+    public boolean  update(UserDTO userDTO,MultipartFile file);
+
+    public boolean deleteUser(String name);
 
 
 }
