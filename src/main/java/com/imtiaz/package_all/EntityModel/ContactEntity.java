@@ -1,4 +1,5 @@
 package com.imtiaz.package_all.EntityModel;
+
 import com.imtiaz.package_all.dto.ContactDTO;
 
 import javax.persistence.Column;

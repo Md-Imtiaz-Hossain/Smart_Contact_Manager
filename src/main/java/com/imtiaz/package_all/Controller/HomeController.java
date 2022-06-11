@@ -1,107 +1,88 @@
 package com.imtiaz.package_all.Controller;
 
 
-import com.imtiaz.package_all.EntityModel.UserEntity;
 import com.imtiaz.package_all.Helper.Message;
 import com.imtiaz.package_all.Service.UserService;
+import com.imtiaz.package_all.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+
+
 @Controller
-@RequestMapping("/")
 public class HomeController {
+	
+	private @Autowired BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	UserService userservice;
+	@RequestMapping(value = "/")
+	public String home(Model model) {
+		model.addAttribute("tittle", "This is dynamic controller");
+		return "home";
+		
+	}
+	@RequestMapping(value = "/about")
+	public String about() {
+		return "about";
+		
+	}
 
-    @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UserService userService;
-
-
-    // Home page controller
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("title", "Home - Smart Contact Manager");
-        return "home";
-    }
-
-    // About page controller
-    @GetMapping("/about")
-    public String about(Model model) {
-        model.addAttribute("title", "About - Smart Contact Manager");
-        return "about";
-    }
-
-
-    // Signup page controller
-    @GetMapping("/signup")
-    public String signup(Model model) {
-        model.addAttribute("title", "Signup - Smart Contact Manager");
-        model.addAttribute("user", new UserEntity());
-        return "/Signup/signup";
-    }
-
-
-    // process the registration form
-    @PostMapping("/do-register")
-    public String doRegister(@Valid @ModelAttribute("user") UserEntity userEntity, Errors bindingResult,
-                             @RequestParam(value = "agreement", defaultValue = "false") boolean agreement,
-                             Model model,
-                             HttpSession session){
-
-        try {
-
-            if (!agreement){
-                System.out.println("You have not agreed the terms and conditions");
-                throw new Exception("You have not agreed the terms and conditions");
-            }
-
-            if (bindingResult.hasErrors()){
-                System.out.println("Error " + bindingResult.toString());
-                model.addAttribute("user", userEntity);
-                return "/Signup/signup";
-            }
-
-            userEntity.setRole("ROLE_USER");
-            userEntity.setEnable(true);
-            userEntity.setImageUrl("default.png");
-            userEntity.setPassword(passwordEncoder.encode(userEntity.getPassword()));
-
-            System.out.println(userEntity);
-
-             userService.saveUser(userEntity);
-
-            model.addAttribute("user", new UserEntity());
-            session.setAttribute("message", new Message("Successfully Registered !!!", "alert-success"));
-            return "/Signup/signup";
-
-
-
-        }catch (Exception e) {
-            e.printStackTrace();
-            model.addAttribute("user", userEntity);
-            session.setAttribute("message", new Message("Something Went Wrong !!! Must agree terms and Condition ", "alert-danger"));
-            return "/Signup/signup";
-        }
-
-    }
-
-
-    // Handler for custom login
-    @GetMapping("/sign-in")
-    public String customLogin(Model model){
-        model.addAttribute("title", "Login Page");
-        return "login";
-    }
-
-
+	@RequestMapping(value = "/signup")
+	public String singUp(Model model) {
+		model.addAttribute("tittle", "Registration");
+		model.addAttribute("user", new UserDTO());
+		return "signup";
+		
+	}
+	
+	@RequestMapping(value = "/signup",method= RequestMethod.POST)
+	public String registerUser(@Valid @ModelAttribute("user")UserDTO user ,BindingResult result1  , @RequestParam(value = "agreement",defaultValue = "false") 
+	boolean agreement ,Model model , HttpSession session) {
+		System.out.println("Agreement "+agreement);
+		System.out.println("User "+user);
+		try {
+		if(!agreement) {
+			System.out.println("you have not agreed the term and condition");
+			model.addAttribute("user",user);
+			throw new Exception("you have not agreed the term and condition");
+			
+		}
+		if(result1.hasErrors()) {
+			model.addAttribute("user", user);
+		    System.out.println("Error"+result1.toString());
+			return "signup";
+		}
+		user.setRole("ROLE_USER");
+		user.setEnabled(true);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		UserDTO result = userservice.save(user);
+		session.setAttribute("message", new Message("Successfully Register ", "alert-success"));
+		model.addAttribute("user", result);
+		}catch(Exception e){
+			model.addAttribute("user" , user);
+			session.setAttribute("message", new Message("Something went wrong "+e.getMessage(), "alert-danger"));
+			
+			
+		}
+		return "signup";
+		
+	}
+	
+	@RequestMapping(value = "/signin")
+	public String customLogin(Model model) {
+	
+		return "login";
+		
+	}
 }
-
-// Last video 13

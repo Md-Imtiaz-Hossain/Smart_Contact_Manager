@@ -1,6 +1,7 @@
 package com.imtiaz.package_all.dto;
 
-import com.smartcontact.entities.UserEntity;
+
+import com.imtiaz.package_all.EntityModel.UserEntity;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;

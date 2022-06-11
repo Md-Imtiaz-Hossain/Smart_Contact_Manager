@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is home page</title>
+</head>
+<body>
+	<section>
+
+		<div class="card  mr-3 ml-3 text-center" th:object="${user}">
+			<div class="card-boby">
+				<div class="container text-center">
+					<img src="#" style="height: 200px; width: 200px"
+						class="contact_pic" alt="contact pic"
+						th:src="@{'/img/'+${user.image}}">
+					<h2 class="mt-3">
+						<Span th:text="${user.name}"></Span>
+					</h2>
+				</div>
+
+				<table class="table">
+					<thead>
+						<tr>
+							<th scope="col">#ID</th>
+							<th scope="col"><span th:text="${user.id}"></span></th>
+
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th scope="row">Email</th>
+							<td><span th:text="${user.email}"></span></td>
+						</tr>
+						<tr>
+							<th scope="row">Role</th>
+							<td><span th:text="${user.role}"></span></td>
+						</tr>
+						<tr>
+							<th scope="row">Account Active</th>
+							<td><span th:text="${user.enabled}"></span></td>
+						</tr>
+						<tr>
+							<th scope="row">About you</th>
+							<td><span th:text="${user.about}"></span></td>
+						</tr>
+
+					</tbody>
+
+				</table>
+				<a href="#" th:onclick="|deleteUser()|"
+					class="btn btn-danger btn-block mt-2">Delete</a>
+				<form action="#"
+					th:action="@{/user/update}">
+					<button type="submit" class="btn btn-primary btn-block mt-3">Update</button>
+				</form>
+
+			</div>
+		</div>
+	</section>
+
+</body>
+</html>

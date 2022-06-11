@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is home page</title>
+</head>
+<body>
+	<section>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6  offset-md-3">
+					<div class="my_card mt-5">
+
+						<div th:if="${session.message}"
+							th:classappend="${session.message.type}"
+							class="alert alert-primary" role="alert">
+							<p th:text="${session.message.content}"></p>
+							<th:block th:text="${#session.removeAttribute('message')}"></th:block>
+
+						</div>
+
+						<h1 class="text-center">Update Here</h1>
+
+						<form novalidate="novalidate" action="#"
+							th:action="@{/user/handle_update_profile_req/}"
+							enctype="multipart/form-data" method="post" th:object="${user}">
+
+							<input type="hidden" th:value="${user.id}" name="cid" />
+							<!-- Name -->
+
+							<div class="form-group">
+								<label for="name">Name</label> <input type="text" id="name"
+									name="name" th:value="${user.name}" class="form-control"
+									th:field="*{name}"
+									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+									required="required" />
+
+
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('name')}" th:text=${e}></div>
+
+							</div>
+
+
+							<!-- Email -->
+							<div class="form-group">
+								<label for="exampleInputEmail1">Email address</label> <input
+									type="email" name="email" class="form-control"
+									th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
+									id="email_field" th:value="${user.email}"
+									placeholder="Enter email" required="required"
+									readonly="readonly">
+
+								<div class="invalid-feedback"
+									th:each="e : ${#fields.errors('email')}" th:text=${e}></div>
+
+							</div>
+
+							<div class="container text-center">
+
+								<img src="#" style="height: 200px; width: 200px"
+									class="contact_pic" alt="contact pic"
+									th:src="@{'/img/'+${user.image}}">
+
+							</div>
+							<p>Select New Image Here</p>
+							<div class="custom-file">
+								<input type="file" id="image" name="profile"
+									class="form-control">
+							</div>
+
+
+
+							<div class="form-group mt-3">
+								<label for="exampleFormControlTextarea1">Tell me about
+									yourself</label>
+								<textarea class="form-control" id="about_field"
+									th:text="${user.about}" name="about" rows="6"
+									required="required"></textarea>
+							</div>
+
+
+
+							<div class="container text-center">
+
+								<button type="submit" class="btn btn-primary text-white">Update</button>
+
+							</div>
+						</form>
+
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+
+
+	</section>
+
+</body>
+</html>

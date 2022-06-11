@@ -1,6 +1,7 @@
 package com.imtiaz.package_all.dto;
 
-import com.smartcontact.entities.ContactEntity;
+
+import com.imtiaz.package_all.EntityModel.ContactEntity;
 
 public class ContactDTO {
 	private Long cid;

@@ -1,10 +1,11 @@
 package com.imtiaz.package_all.Service;
 
-import com.smartcontact.dto.ContactDTO;
-import com.smartcontact.dto.UserDTO;
-import com.smartcontact.entities.ContactEntity;
-import com.smartcontact.entities.UserEntity;
-import com.smartcontact.repositories.UserRepositories;
+
+import com.imtiaz.package_all.EntityModel.ContactEntity;
+import com.imtiaz.package_all.EntityModel.UserEntity;
+import com.imtiaz.package_all.Repository.UserRepositories;
+import com.imtiaz.package_all.dto.ContactDTO;
+import com.imtiaz.package_all.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;

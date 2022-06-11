@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th = "http://www.thymeleaf.org" th:replace="normal/base::layout(~{::section})">
+<head>
+<meta charset="ISO-8859-1">
+<title>This is home page</title>
+</head>
+<body>
+<section>
+
+<h1>UserEmail <span th:text=${userDTO.email}></span></h1>
+<h1><a href="#" th:href = @{/logout} ></a></h1>
+
+</section>
+
+</body>
+</html>
