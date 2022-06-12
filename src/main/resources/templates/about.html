@@ -1,15 +1,64 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th = "http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="base::layout(~{::section})">
 <head>
-<meta charset="ISO-8859-1">
-<title>This is home page</title>
+    <meta charset="ISO-8859-1">
+    <title>This is home page</title>
+
 </head>
 <body>
+
 <section>
+    <div class="text-left p-5">
+        <div class="p-5">
+            <div class="card responsive">
+                <h2 class="card-header">About "Smart contact Manager</h2>
+                <div class="card-body">
+                    <p class="card-title text-justify">"Smart contact Manager" contact management system that helps you
+                        manage and
+                        nurture your contacts in order to create strong and lasting relationships with them.
+                        It automates contact data entry for you and provides 360-degree views of individual person.</p>
+                </div>
+            </div>
+        </div>
 
-<h1>This is About Controller</h1>
+        <div class="p-5">
+            <div class="card embed-responsive-item">
+                <h2 class="card-header">About Developer</h2>
 
+                <div class="card mt-3" style="max-width: 100%;">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            <img width="300" src="../static/img/usa.jpg" th:src="@{img/usa.jpg}"
+                                 class="img-fluid rounded-start" alt="Imtiaz">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <span>
+                                    <h5>Md Imtiaz Hossain</h5>
+                                    <small class="text-muted">imtiaz005123@gmail.com </small>
+                                </span>
+
+                                <p class="card-text text-justify">I am a hardworking and ambitious individual with a
+                                    great passion.
+                                    Looking for an opportunity to connect with a group.
+                                    So I can completely use my ability of Critical thinking,
+                                    Problem-solving and information of Software development to make an important
+                                    expansion to the association alongside lifting my profession.
+                                    I have excellent communication skills, enabling me to effectively communicate with a
+                                    wide range of people.
+                                    I can work independently or at a brunch base and like to adopt new things and
+                                    advances. <a href="https://sites.google.com/view/mdimtiazhossaintechy5/home"
+                                                 target="_blank" class="card-link">More Details </a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </section>
+
 
 </body>
 </html>
