@@ -38,21 +38,21 @@
 
 
 								<div class="invalid-feedback"
-									th:each="e : ${#fields.errors('name')}" th:text=${e}></div>
+									th:each="e : ${#fields.errors('name')}" th:text="${e}"></div>
 
 							</div>
 
 
 							<!-- Email -->
 							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label> <input
+								<label for="email_field">Email address</label> <input
 									type="email" name="email" class="form-control"
 									th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
 									id="email_field" th:value="${user.email}"
 									placeholder="Enter email" required="required">
 
 								<div class="invalid-feedback"
-									th:each="e : ${#fields.errors('email')}" th:text=${e}></div>
+									th:each="e : ${#fields.errors('email')}" th:text="${e}"></div>
 
 							</div>
 
@@ -69,14 +69,14 @@
 											class="fa fa-eye-slash" aria-hidden="true"></i></span>
 									</div>
 									<div class="invalid-feedback"
-										th:each="e : ${#fields.errors('password')}" th:text=${e}></div>
+										th:each="e : ${#fields.errors('password')}" th:text="${e}"></div>
 
 								</div>
 
 							</div>
 
 							<div class="form-group">
-								<label for="exampleFormControlTextarea1">Tell me about
+								<label for="about_field">Tell me about
 									yourself</label>
 								<textarea class="form-control" id="about_field"
 									th:value="${user.about}" name="about" rows="6"
