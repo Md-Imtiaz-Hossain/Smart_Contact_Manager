@@ -41,36 +41,36 @@ public class HomeController {
 	@RequestMapping(value = "/signup")
 	public String singUp(Model model) {
 		model.addAttribute("tittle", "Registration");
-		model.addAttribute("user", new UserDTO());
+		model.addAttribute("users", new UserDTO());
 		return "signup";
 		
 	}
 	
 	@RequestMapping(value = "/signup",method= RequestMethod.POST)
-	public String registerUser(@Valid @ModelAttribute("user")UserDTO user ,BindingResult result1  , @RequestParam(value = "agreement",defaultValue = "false") 
-	boolean agreement ,Model model , HttpSession session) {
+	public String registerUser(@Valid @ModelAttribute("users")UserDTO users , BindingResult result1  , @RequestParam(value = "agreement",defaultValue = "false")
+	boolean agreement , Model model , HttpSession session) {
 		System.out.println("Agreement "+agreement);
-		System.out.println("User "+user);
+		System.out.println("users "+users);
 		try {
 		if(!agreement) {
 			System.out.println("you have not agreed the term and condition");
-			model.addAttribute("user",user);
+			model.addAttribute("users",users);
 			throw new Exception("you have not agreed the term and condition");
 			
 		}
 		if(result1.hasErrors()) {
-			model.addAttribute("user", user);
+			model.addAttribute("users", users);
 		    System.out.println("Error"+result1.toString());
 			return "signup";
 		}
-		user.setRole("ROLE_USER");
-		user.setEnabled(true);
-		user.setPassword(passwordEncoder.encode(user.getPassword()));
-		UserDTO result = userservice.save(user);
+		users.setRole("ROLE_USER");
+		users.setEnabled(true);
+		users.setPassword(passwordEncoder.encode(users.getPassword()));
+		UserDTO result = userservice.save(users);
 		session.setAttribute("message", new Message("Successfully Register ", "alert-success"));
-		model.addAttribute("user", result);
+		model.addAttribute("users", result);
 		}catch(Exception e){
-			model.addAttribute("user" , user);
+			model.addAttribute("users" , users);
 			session.setAttribute("message", new Message("Something went wrong "+e.getMessage(), "alert-danger"));
 			
 			

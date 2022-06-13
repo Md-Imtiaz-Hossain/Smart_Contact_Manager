@@ -102,8 +102,8 @@ public class ContactEntity {
     public UserEntity getUser() {
         return userEntity;
     }
-    public void setUser(UserEntity user) {
-        this.userEntity = user;
+    public void setUser(UserEntity users) {
+        this.userEntity = users;
     }
 
     public static ContactEntity of(ContactDTO contactDTO) {

@@ -18,10 +18,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity security) throws Exception {
         security.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER").antMatchers("/")
+                .antMatchers("/users/**").hasRole("USER").antMatchers("/")
                 .permitAll().and().formLogin().loginPage("/signin").
                 loginProcessingUrl("/doLogin").
-                defaultSuccessUrl("/user/index").failureUrl("/login-fail").
+                defaultSuccessUrl("/users/index").failureUrl("/login-fail").
                 and().csrf().disable();
     }
 

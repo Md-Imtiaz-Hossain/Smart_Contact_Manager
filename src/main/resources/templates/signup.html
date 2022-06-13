@@ -24,17 +24,17 @@
 						<h1 class="text-center">Register Here</h1>
 
 						<form novalidate="novalidate" action="" th:action="@{/signup}"
-							method="post" th:object="${user}">
+							method="post" th:object="${users}">
 
 
 							<!-- Name -->
 
 							<div class="form-group">
 								<label for="name">Name</label> <input type="text" id="name"
-									name="name" th:value="${user.name}" class="form-control"
-									th:field="*{name}"
-									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
-									placeholder="Enter Name" required="required" />
+																	  name="name" th:value="${users.name}" class="form-control"
+																	  th:field="*{name}"
+																	  th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
+																	  placeholder="Enter Name" required="required" />
 
 
 								<div class="invalid-feedback"
@@ -48,7 +48,7 @@
 								<label for="email_field">Email address</label> <input
 									type="email" name="email" class="form-control"
 									th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
-									id="email_field" th:value="${user.email}"
+									id="email_field" th:value="${users.email}"
 									placeholder="Enter email" required="required">
 
 								<div class="invalid-feedback"
@@ -79,8 +79,8 @@
 								<label for="about_field">Tell me about
 									yourself</label>
 								<textarea class="form-control" id="about_field"
-									th:value="${user.about}" name="about" rows="6"
-									required="required"></textarea>
+										  th:value="${users.about}" name="about" rows="6"
+										  required="required"></textarea>
 							</div>
 
 							<div class="form-group form-check text-center">

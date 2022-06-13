@@ -24,15 +24,15 @@
 						<h1 class="text-center">Update Here</h1>
 
 						<form novalidate="novalidate" action="#"
-							th:action="@{/user/handle_update_profile_req/}"
-							enctype="multipart/form-data" method="post" th:object="${user}">
+							th:action="@{/users/handle_update_profile_req/}"
+							enctype="multipart/form-data" method="post" th:object="${users}">
 
-							<input type="hidden" th:value="${user.id}" name="cid" />
+							<input type="hidden" th:value="${users.id}" name="cid" />
 							<!-- Name -->
 
 							<div class="form-group">
 								<label for="name">Name</label> <input type="text" id="name"
-									name="name" th:value="${user.name}" class="form-control"
+									name="name" th:value="${users.name}" class="form-control"
 									th:field="*{name}"
 									th:classappend="${#fields.hasErrors('name') ? 'is-invalid':''}"
 									required="required" />
@@ -46,10 +46,10 @@
 
 							<!-- Email -->
 							<div class="form-group">
-								<label for="exampleInputEmail1">Email address</label> <input
+								<label for="email_field">Email address</label> <input
 									type="email" name="email" class="form-control"
 									th:classappend="${#fields.hasErrors('password') ? 'is-invalid':''}"
-									id="email_field" th:value="${user.email}"
+									id="email_field" th:value="${users.email}"
 									placeholder="Enter email" required="required"
 									readonly="readonly">
 
@@ -62,7 +62,7 @@
 
 								<img src="#" style="height: 200px; width: 200px"
 									class="contact_pic" alt="contact pic"
-									th:src="@{'/img/'+${user.image}}">
+									th:src="@{'/img/'+${users.image}}">
 
 							</div>
 							<p>Select New Image Here</p>
@@ -74,10 +74,10 @@
 
 
 							<div class="form-group mt-3">
-								<label for="exampleFormControlTextarea1">Tell me about
+								<label for="about_field">Tell me about
 									yourself</label>
 								<textarea class="form-control" id="about_field"
-									th:text="${user.about}" name="about" rows="6"
+									th:text="${users.about}" name="about" rows="6"
 									required="required"></textarea>
 							</div>
 

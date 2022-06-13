@@ -30,7 +30,7 @@
       </td>
       <td>
       
-      <a href = "#" th:href="@{'/user/contact/'+${c.cid}}">
+      <a href = "#" th:href="@{'/users/contact/'+${c.cid}}">
       <span th:text=${c.email}></span>
       
       </a>
@@ -38,7 +38,7 @@
       </td>
       <td th:text="${c.phoneNumber}"></td>
       <td>
-      <form action="#" method="post" th:action="@{'/user/contact/update/'+${c.cid}}">
+      <form action="#" method="post" th:action="@{'/users/contact/update/'+${c.cid}}">
       <button type="submit" class = "btn btn-danger btn-sm">Update</button>
       </form>
       <a href = "#" th:onclick="|deleteContact(${c.cid})|"class = "btn btn-primary btn-sm mt-2">Delete</a>
@@ -52,15 +52,15 @@
 <nav aria-label="...">
   <ul class="pagination">
     <li th:if= "${currentPage}!= 0" class="page-item">
-      <a th:href = "@{'/user/view_contacts/'+${currentPage-1}}" class="page-link" href="#" tabindex="-1">Previous</a>
+      <a th:href = "@{'/users/view_contacts/'+${currentPage-1}}" class="page-link" href="#" tabindex="-1">Previous</a>
     </li>
    
     <li  th:if= "${totalPages}!= 0" th:classappend = "${curentPage==i-1?'active':''}" class="page-item"  th:each= "i : ${#numbers.sequence(1,totalPages)}">
-      <a th:href = "@{'/user/view_contacts/'+${i -1}}" class="page-link" href="#"><span th:text = ${i}></span></a>
+      <a th:href = "@{'/users/view_contacts/'+${i -1}}" class="page-link" href="#"><span th:text = ${i}></span></a>
     </li>
     
     <li th:if = "${currentPage+1 != totalPages && totalPages !=0}" class="page-item">
-      <a th:href = "@{'/user/view_contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a>
+      <a th:href = "@{'/users/view_contacts/'+${currentPage+1}}" class="page-link" href="#">Next</a>
     </li>
   </ul>
 </nav>

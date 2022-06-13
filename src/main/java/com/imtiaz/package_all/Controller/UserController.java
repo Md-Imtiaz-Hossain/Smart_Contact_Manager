@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import java.security.Principal;
 
 @Controller
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/users")
 public class UserController {
 
 	@Autowired
@@ -93,7 +93,7 @@ public class UserController {
 	public String deleteContact(@PathVariable("cId") Long cId, Model model, Principal principal, HttpSession session) {
 		contactSevice.deleteContactById(cId, principal.getName());
 		session.setAttribute("message", new Message("Contact deleted successfully", "success"));
-		return "redirect:/user/view_contacts/0";
+		return "redirect:/users/view_contacts/0";
 	}
 
 	// open update form handler
@@ -115,14 +115,14 @@ public class UserController {
 		} else {
 			session.setAttribute("message", new Message("Contact not Updated ", "danger"));
 		}
-		return "redirect:/user/contact/{cid}";
+		return "redirect:/users/contact/{cid}";
 
 	}
 	
 	@GetMapping(value = "/profile")
 	public String yourProfile(Model model,Principal principal) {	
 		model.addAttribute("tittle","Your Profile");
-		model.addAttribute("user", userService.getUserDetailsByUserName(principal.getName()));
+		model.addAttribute("users", userService.getUserDetailsByUserName(principal.getName()));
 		return "normal/profile";
 	
 		
@@ -130,7 +130,7 @@ public class UserController {
 	
 	@GetMapping(value = "/update")
 	public String updateProfile(Principal principal,Model model) {
-		model.addAttribute("user", userService.getUserDetailsByUserName(principal.getName()));
+		model.addAttribute("users", userService.getUserDetailsByUserName(principal.getName()));
 		return "normal/update_profile";
 		
 	}
@@ -138,14 +138,14 @@ public class UserController {
 	@PostMapping(value= "/handle_update_profile_req")
 	public String updateProfilerequest(@ModelAttribute UserDTO userDTO,@RequestParam("profile") MultipartFile file,HttpSession httpSession ) {
 		if (userService.update(userDTO, file)) {
-			httpSession.setAttribute("message", new Message("User Updated Successfully", "success"));
+			httpSession.setAttribute("message", new Message("users Updated Successfully", "success"));
 
 		} else {
 			httpSession.setAttribute("message", new Message("User not Updated ", "danger"));
 			
 		}
 		
-		return "redirect:/user/profile";
+		return "redirect:/users/profile";
 		
 	}
 	
