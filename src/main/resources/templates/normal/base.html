@@ -18,7 +18,6 @@
 	integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
 	crossorigin="anonymous" />
 
-
 <title th:text="${tittle}">Base Html</title>
 <link rel="stylesheet" th:href="@{/css/style.css}">
 <link th:rel="stylesheet"
@@ -29,43 +28,39 @@
 <body>
 	<!-- This is navbar -->
 
-	<nav class="navbar navbar-expand-lg bg-dark">
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark">
 		<i onclick="toggleSidebar()" class="fas fa-bars m-3"
 			style="color: white;"></i> <a class="navbar-brand" href="#">Smart
 			Contact Manager</a>
-
-
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-
 			<ul class="navbar-nav ml-auto text-uppercase">
 				<li class="nav-item active"><a class="nav-link" href="#"
 					th:href="@{/users/index}"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span>
 				</a></li>
-
-
 				<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-alt"></i><span
 						th:text=${userDTO.name}>  </span></a></li>
-
-
 				<li class="nav-item"><a class="nav-link" href="#"
 					th:href="@{/logout}"> <i class="fas fa-sign-out-alt"></i> Logout</a>
 			</ul>
-
 		</div>
 	</nav>
 
-	<div class="sidebar">
+	<div id="sidebar" class="sidebar" style="background-color: #e7e7e7">
 		<!-- 	<span onclick = "toggleSidebar()" class=crossBtn>&times;</span> -->
-		<a href="#" th:href=@{/users/index} class="item"><i
-			class="fas fa-home"></i><span>Home</span></a> <a href="#"
-			th:href=@{/users/view_contacts/0} class="item"><i
-			class="fas fa-id-card-alt"></i> <span>View Contacts</span></a> <a
-			href="#" th:href=@{/users/add_contact} class="item"><i
-			class="fas fa-address-book"></i><span>Add Contact</span></a> 
-			<a href="#" th:href = @{/users/profile} class="item"><i class="fas fa-user-alt"></i><span>Your profile</span></a>
-			<a href="#" class="item"><i class="fas fa-user-cog"></i><span>Settings</span></a>
-		    <a href="#" class="item" th:href="@{/logout}" ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
+		<a href="#" th:href="@{/users/index}" class="item" style=""><i
+			class="fas fa-home"></i><span>Dashboard</span></a>
+		<a href="#"
+			th:href="@{/users/view_contacts/0}" class="item"><i
+			class="fas fa-id-card-alt"></i> <span>View Contacts</span></a>
+		<a
+			href="#" th:href="@{/users/add_contact}" class="item"><i
+			class="fas fa-address-book"></i><span>Add Contact</span></a>
+
+		<a href="#" th:href = "@{/users/profile}" class="item"><i class="fas fa-user-alt"></i><span>Your profile</span></a>
+
+		<a href="#" class="item"><i class="fas fa-user-cog"></i><span>Settings</span></a>
+
+		<a href="#" class="item" th:href="@{/logout}" ><i class="fas fa-sign-out-alt"></i><span>Logout</span></a>
 		    <div class="divider"></div>
 	</div>
 
@@ -75,7 +70,7 @@
 		<div th:if="${session.message}" class="container">
 			<div th:classappend="${'alert-'+session.message.type}" class="alert"
 				role="alert">
-				<span th:text=${session.message.content}></span>
+				<span th:text="${session.message.content}"></span>
 
 			</div>
 			<th:block th:text="${#session.removeAttribute('message')}"></th:block>

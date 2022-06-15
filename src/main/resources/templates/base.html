@@ -13,6 +13,11 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous">
 
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+          integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+          crossorigin="anonymous" />
+
     <title th:text="${tittle}">Base Html</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link th:rel="stylesheet"
@@ -53,13 +58,13 @@
     <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#" th:href="@{/}"> <i class="fas fa-home"></i>Home <span class="sr-only">(current)</span></a></li>
+                <a class="nav-link" href="#" th:href="@{/}"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span></a></li>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/about}"><i class="fa-solid fa-circle-info"></i> About</a></li>
+                <a class="nav-link" href="#" th:href="@{/about}"><i class="fas fa-circle-info"></i> About</a></li>
             <li class="nav-item">
                 <a class="nav-link" href="#" th:href="@{/signin}"><i class="fas fa-sign-out-alt"></i> Login</a>
             <li class="nav-item">
-                <a class="nav-link" href="#" th:href="@{/signup}"><i class="fa-solid fa-user-plus"></i>  Sign UP</a></li>
+                <a class="nav-link" href="#" th:href="@{/signup}"><i class="fas fa-user-plus"></i>  Sign UP</a></li>
         </ul>
     </div>
 </nav>
