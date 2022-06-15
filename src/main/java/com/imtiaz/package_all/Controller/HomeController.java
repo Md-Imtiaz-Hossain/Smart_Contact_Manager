@@ -28,7 +28,7 @@ public class HomeController {
 	UserService userservice;
 	@RequestMapping(value = "/")
 	public String home(Model model) {
-		model.addAttribute("tittle", "This is dynamic controller");
+		model.addAttribute("tittle", "Home");
 		return "home";
 		
 	}

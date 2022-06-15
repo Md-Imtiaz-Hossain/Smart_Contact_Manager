@@ -29,7 +29,7 @@
 <body>
 	<!-- This is navbar -->
 
-	<nav class="navbar navbar-expand-lg bg-green">
+	<nav class="navbar navbar-expand-lg bg-dark">
 		<i onclick="toggleSidebar()" class="fas fa-bars m-3"
 			style="color: white;"></i> <a class="navbar-brand" href="#">Smart
 			Contact Manager</a>
@@ -40,12 +40,16 @@
 
 			<ul class="navbar-nav ml-auto text-uppercase">
 				<li class="nav-item active"><a class="nav-link" href="#"
-					th:href="@{/users/index}">Home <span class="sr-only">(current)</span>
+					th:href="@{/users/index}"> <i class="fas fa-home"></i> Home <span class="sr-only">(current)</span>
 				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"><span
-						th:text=${userDTO.name}></span></a></li>
+
+
+				<li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-user-alt"></i><span
+						th:text=${userDTO.name}>  </span></a></li>
+
+
 				<li class="nav-item"><a class="nav-link" href="#"
-					th:href="@{/logout}">Logout</a>
+					th:href="@{/logout}"> <i class="fas fa-sign-out-alt"></i> Logout</a>
 			</ul>
 
 		</div>
