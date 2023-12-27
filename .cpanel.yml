@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/iimtiazc/public_html/smart-contact-management
+    - /bin/cp * $DEPLOYPATH
